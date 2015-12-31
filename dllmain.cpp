@@ -13,10 +13,10 @@ static wchar_t const * const reason_strings[] = {
 
 BOOL ProcessDetach(
 	HINSTANCE hDLL,
-	LPVOID    Reserved)
+	LPVOID    pReserved)
 {
-	// Reserved is NULL if FreeLibrary has been called or the DLL load failed
-	// and non-NULL if the process is terminating.
+	// pReserved is NULL if FreeLibrary has been called or the DLL load
+	// failed and non-NULL if the process is terminating.
 
 	// Return value is ignored by DllMain.
 	return TRUE;
@@ -24,9 +24,9 @@ BOOL ProcessDetach(
 
 BOOL ProcessAttach(
 	HINSTANCE hDLL,
-	LPVOID    Reserved)
+	LPVOID    pReserved)
 {
-	// Reserved is NULL for dynamic loads and non-NULL for static loads.
+	// pReserved is NULL for dynamic loads and non-NULL for static loads.
 	
 	return scssbs::hack.start();
 }
@@ -45,28 +45,30 @@ BOOL ThreadDetach(
 	return TRUE;
 }
 
+// For more info see link below:
+// https://msdn.microsoft.com/en-us/library/windows/desktop/ms682583%28v=vs.85%29.aspx
 BOOL WINAPI DllMain(
 	HINSTANCE hDLL,
 	DWORD     nReason,
-	LPVOID    Reserved)
+	LPVOID    pReserved)
 {
 	BOOL bSuccess = TRUE;
 
-	if (!scssbs::log.Setup())
+	if (!scssbs::log::setup())
 		return FALSE;
 
 	if (nReason <= DLL_THREAD_DETACH)
-		scssbs::log.info(L"DllMain called - Reason: $s16$", reason_strings[nReason]);
+		scssbs::log::info(L"DllMain called - Reason: $s16$", reason_strings[nReason]);
 	else // This branched probably can't be taken.
-		scssbs::log.info(L"DllMain called - Reason: $i32$", nReason);
+		scssbs::log::info(L"DllMain called - Reason: $i32$", nReason);
 
 	switch (nReason)
 	{
 		case DLL_PROCESS_DETACH:
-			bSuccess = ProcessDetach(hDLL);
+			bSuccess = ProcessDetach(hDLL, pReserved);
 			break;
 		case DLL_PROCESS_ATTACH:
-			bSuccess = ProcessAttach(hDLL, Reserved);
+			bSuccess = ProcessAttach(hDLL, pReserved);
 			break;
 		case DLL_THREAD_ATTACH:
 			bSuccess = ThreadAttach(hDLL);
