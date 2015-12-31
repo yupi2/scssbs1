@@ -17,11 +17,11 @@ BOOL hack::start()
 	if (log::setup())
 		log::info(L"MainThread handle: $h32$", hThread);
 	
-	if (hThread)
+	if (hThread != NULL)
 	{
 		DWORD ret = ResumeThread(hThread);
 		(void)CloseHandle(hThread);
-		return ret != -1;
+		return ret != (DWORD)-1;
 	}
 	
 	return FALSE;
