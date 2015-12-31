@@ -18,6 +18,8 @@ BOOL ProcessDetach(
 	// pReserved is NULL if FreeLibrary has been called or the DLL load
 	// failed and non-NULL if the process is terminating.
 
+	scssbs::log::cleanup();
+	
 	// Return value is ignored by DllMain.
 	return TRUE;
 }
@@ -68,6 +70,7 @@ BOOL WINAPI DllMain(
 			bSuccess = ProcessDetach(hDLL, pReserved);
 			break;
 		case DLL_PROCESS_ATTACH:
+			(void)DisableThreadLibraryCalls(hDLL);
 			bSuccess = ProcessAttach(hDLL, pReserved);
 			break;
 		case DLL_THREAD_ATTACH:
