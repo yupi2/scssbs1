@@ -5,21 +5,10 @@ typedef int BOOL;
 
 namespace scssbs
 {
-
-	class Hack
+	namespace hack
 	{
-		private:
-			// lock/mutex/whatever-it's-called here.
-
-		public:
-			Hack();
-			~Hack();
-
-			BOOL start();
-	};
-
-	Hack hack;
-
+		BOOL start();
+	}
 }
 
 #endif

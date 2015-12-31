@@ -10,9 +10,7 @@ BYTE * util::get_module_base(
 	HMODULE baseAddress = GetModuleHandle(moduleName);
 
 	if (log::setup())
-	{
 		log::info(L"Module address: $h32$ - \'$s16$\'", baseAddress, moduleName);
-	}
 
 	return (BYTE *)baseAddress;
 }
