@@ -1,6 +1,16 @@
 #include <Windows.h>
 //#include <iostream>
 
+#include "logger.hpp"
+#include "scssbs.hpp"
+
+static wchar_t const * const reason_strings[] = {
+	[DLL_PROCESS_DETACH] = L"process detach",
+	[DLL_PROCESS_ATTACH] = L"process attach",
+	[DLL_THREAD_ATTACH]  = L"thread attach",
+	[DLL_THREAD_DETACH]  = L"thread detach"
+};
+
 BOOL ProcessDetach(
 	HINSTANCE hDLL,
 	LPVOID    Reserved)
@@ -17,7 +27,7 @@ BOOL ProcessAttach(
 	LPVOID    Reserved)
 {
 	// Reserved is NULL for dynamic loads and non-NULL for static loads.
-	
+
 	
 }
 
@@ -41,6 +51,14 @@ BOOL WINAPI DllMain(
 	LPVOID    Reserved)
 {
 	BOOL bSuccess = TRUE;
+
+	if (!Log.Setup())
+		return FALSE;
+
+	if (nReason <= DLL_THREAD_DETACH)
+		Log.info(L"DllMain called - Reason: $s16$", reason_strings[nReason]);
+	else // This branched probably can't be taken.
+		Log.info(L"DllMain called - Reason: $i32$", nReason);
 
 	switch (nReason)
 	{
