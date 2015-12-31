@@ -30,7 +30,7 @@ BOOL ProcessAttach(
 {
 	// pReserved is NULL for dynamic loads and non-NULL for static loads.
 	
-	return scssbs::hack.start();
+	return scssbs::hack::start();
 }
 
 BOOL ThreadAttach(
@@ -70,7 +70,7 @@ BOOL WINAPI DllMain(
 			bSuccess = ProcessDetach(hDLL, pReserved);
 			break;
 		case DLL_PROCESS_ATTACH:
-			(void)DisableThreadLibraryCalls(hDLL);
+			//(void)DisableThreadLibraryCalls(hDLL);
 			bSuccess = ProcessAttach(hDLL, pReserved);
 			break;
 		case DLL_THREAD_ATTACH:
