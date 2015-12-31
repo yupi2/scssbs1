@@ -1,4 +1,7 @@
+#include <Windows.h>
 #include "logger.hpp"
+
+using scssbs;
 
 bool handleIsValid(
 	HANDLE hHandle)
@@ -50,4 +53,11 @@ bool Logger::Setup()
 	
 	isSetup = true;
 	return true;
+}
+
+void Logger::info(
+	wchar_t const * fmt,
+	...)
+{
+	return;
 }

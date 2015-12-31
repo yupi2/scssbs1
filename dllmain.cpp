@@ -27,8 +27,8 @@ BOOL ProcessAttach(
 	LPVOID    Reserved)
 {
 	// Reserved is NULL for dynamic loads and non-NULL for static loads.
-
 	
+	return scssbs::hack.start();
 }
 
 BOOL ThreadAttach(
@@ -52,13 +52,13 @@ BOOL WINAPI DllMain(
 {
 	BOOL bSuccess = TRUE;
 
-	if (!Log.Setup())
+	if (!scssbs::log.Setup())
 		return FALSE;
 
 	if (nReason <= DLL_THREAD_DETACH)
-		Log.info(L"DllMain called - Reason: $s16$", reason_strings[nReason]);
+		scssbs::log.info(L"DllMain called - Reason: $s16$", reason_strings[nReason]);
 	else // This branched probably can't be taken.
-		Log.info(L"DllMain called - Reason: $i32$", nReason);
+		scssbs::log.info(L"DllMain called - Reason: $i32$", nReason);
 
 	switch (nReason)
 	{
