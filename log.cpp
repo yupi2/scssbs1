@@ -1,10 +1,12 @@
 #include <Windows.h>
 #include "logger.hpp"
+#include <cstdarg>
 
 using scssbs;
 
 ////////////////////////////////////////////////////////////////////
 // lock/mutex/whatever-it's-called here.
+//lock-type lock-name = lockthing;
 
 bool isSetup = false;
 
@@ -57,12 +59,72 @@ bool log::setup()
 	return true;
 }
 
+/****
+ * The printf stuff below is some code from Bjarne that I'll use
+ * as reference whenever I feel like finishing the logging code.
+ */
+
+/*
+void printf(
+	wchar_t const * fmt)	
+{
+	while (s && *s) {
+	 	if (*s=='%' && *++s!='%')	// make sure that there wasn't meant to be more arguments
+						// %% represents plain % in a format string
+	         throw runtime_error("invalid format: missing arguments");
+		std::cout << *s++;
+	}
+}
+
+template<typename T, typename... Args>		// note the "..."
+void printf(
+	wchar_t const * fmt,
+	T value,
+	Args... args)	// note the "..."
+{
+	while (s && *s) {
+		if (*s=='%' && *++s!='%') {	// a format specifier (ignore which one it is)
+			std::cout << value;		// use first non-format argument
+			return printf(++s, args...); 	// ``peel off'' first argument
+		}
+		std::cout << *s++;
+	}
+	throw std::runtime error("extra arguments provided to printf");
+}
+*/
+
+void log::message(
+	wchar_t const * prefix,
+	wchar_t const * fmt,
+	...)
+{
+	if (!log::setup())
+		return;
+
+	if (!prefix || !fmt)
+		return;
+
+	//va_list args;
+	//va_start(args, fmt);
+}
+
+void log::error(
+	wchar_t const * fmt,
+	...)
+{
+	log::message(L"[ERROR]", fmt, ...);
+}
+
+void log::warning(
+	wchar_t const * fmt,
+	...)
+{
+	log::message(L"[WARNING]", fmt, ...);
+}
+
 void log::info(
 	wchar_t const * fmt,
 	...)
 {
-	if (!isSetup)
-		return;
-
-	return;
+	log::message(L"[INFO]", fmt, ...);
 }
