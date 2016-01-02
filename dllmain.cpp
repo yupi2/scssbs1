@@ -19,7 +19,7 @@ BOOL ProcessDetach(
 	// failed and non-NULL if the process is terminating.
 
 	scssbs::log::cleanup();
-	
+
 	// Return value is ignored by DllMain.
 	return TRUE;
 }
@@ -29,7 +29,7 @@ BOOL ProcessAttach(
 	LPVOID    pReserved)
 {
 	// pReserved is NULL for dynamic loads and non-NULL for static loads.
-	
+
 	return scssbs::hack::start();
 }
 
@@ -61,8 +61,8 @@ BOOL WINAPI DllMain(
 
 	if (nReason <= DLL_THREAD_DETACH)
 		scssbs::log::info(L"DllMain called - Reason: $s16$", reason_strings[nReason]);
-	else // This branched probably can't be taken.
-		scssbs::log::info(L"DllMain called - Reason: $i32$", nReason);
+	else
+		scssbs::log::info(L"DllMain called - Reason: $u32$", nReason);
 
 	switch (nReason)
 	{

@@ -10,11 +10,11 @@ namespace scssbs
 		void cleanup();
 
 		void message(wchar_t const * prefix, wchar_t const * fmt, ..);
-		
+
 		void error(wchar_t const * fmt, ...);
-		
+
 		void warning(wchar_t const * fmt, ...);
-		
+
 		void info(wchar_t const * fmt, ...);
 	}
 }

@@ -66,7 +66,7 @@ bool log::setup()
 
 /*
 void printf(
-	wchar_t const * fmt)	
+	wchar_t const * fmt)
 {
 	while (s && *s) {
 	 	if (*s=='%' && *++s!='%')	// make sure that there wasn't meant to be more arguments
