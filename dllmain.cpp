@@ -1,8 +1,8 @@
 #include <Windows.h>
 //#include <iostream>
 
-#include "logger.hpp"
-#include "scssbs.hpp"
+#include "log.hpp"
+#include "hack.hpp"
 
 static wchar_t const * const reason_strings[] = {
 	[DLL_PROCESS_DETACH] = L"process detach",
@@ -15,6 +15,8 @@ BOOL ProcessDetach(
 	HINSTANCE hDLL,
 	LPVOID    pReserved)
 {
+	(void)hDLL;
+	(void)pReserved;
 	// pReserved is NULL if FreeLibrary has been called or the DLL load
 	// failed and non-NULL if the process is terminating.
 
@@ -28,6 +30,8 @@ BOOL ProcessAttach(
 	HINSTANCE hDLL,
 	LPVOID    pReserved)
 {
+	(void)hDLL;
+	(void)pReserved;
 	// pReserved is NULL for dynamic loads and non-NULL for static loads.
 
 	return scssbs::hack::start();
@@ -36,6 +40,8 @@ BOOL ProcessAttach(
 BOOL ThreadAttach(
 	HINSTANCE hDLL)
 {
+	(void)hDLL;
+
 	// Return value is ignored by DllMain.
 	return TRUE;
 }
@@ -43,6 +49,8 @@ BOOL ThreadAttach(
 BOOL ThreadDetach(
 	HINSTANCE hDLL)
 {
+	(void)hDLL;
+
 	// Return value is ignored by DllMain.
 	return TRUE;
 }

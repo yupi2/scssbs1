@@ -9,7 +9,7 @@ namespace scssbs
 
 		void cleanup();
 
-		void message(wchar_t const * prefix, wchar_t const * fmt, ..);
+		void message(wchar_t const * prefix, wchar_t const * fmt, ...);
 
 		void error(wchar_t const * fmt, ...);
 

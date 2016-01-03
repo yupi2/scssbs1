@@ -1,18 +1,18 @@
 #include <Windows.h>
-#include "logger.hpp"
+#include "log.hpp"
 #include <cstdarg>
 
-using scssbs;
+using namespace scssbs;
 
 ////////////////////////////////////////////////////////////////////
 // lock/mutex/whatever-it's-called here.
 //lock-type lock-name = lockthing;
 
-bool isSetup = false;
+static bool isSetup = false;
 
-HANDLE stdin  = NULL;
-HANDLE stdout = NULL;
-HANDLE stderr = NULL;
+static HANDLE stdin  = NULL;
+static HANDLE stdout = NULL;
+static HANDLE stderr = NULL;
 ////////////////////////////////////////////////////////////////////
 
 bool handleIsValid(
@@ -112,19 +112,28 @@ void log::error(
 	wchar_t const * fmt,
 	...)
 {
-	log::message(L"[ERROR]", fmt, ...);
+	va_list args;
+	va_start(args, fmt);
+	log::message(L"[ERROR]", fmt, args);
+	va_end(args);
 }
 
 void log::warning(
 	wchar_t const * fmt,
 	...)
 {
-	log::message(L"[WARNING]", fmt, ...);
+	va_list args;
+	va_start(args, fmt);
+	log::message(L"[WARNING]", fmt, args);
+	va_end(args);
 }
 
 void log::info(
 	wchar_t const * fmt,
 	...)
 {
-	log::message(L"[INFO]", fmt, ...);
+	va_list args;
+	va_start(args, fmt);
+	log::message(L"[INFO]", fmt, args);
+	va_end(args);
 }

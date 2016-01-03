@@ -3,14 +3,19 @@
 
 #include <Windows.h>
 
+typedef void* (*CreateInterfaceFn)(const char *pName, int *pReturnCode);
+
 namespace scssbs
 {
 	namespace hack
 	{
 		BOOL start();
-		
-		BYTE * clientBase = NULL;
-		BYTE * engineBase = NULL;
+
+		extern CreateInterfaceFn clientCreateInterface;
+		extern CreateInterfaceFn engineCreateInterface;
+
+		extern BYTE * clientBase;
+		extern BYTE * engineBase;
 	}
 }
 
