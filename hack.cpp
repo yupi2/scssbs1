@@ -15,13 +15,13 @@ DWORD WINAPI BHOPThreadProc(
 	LPVOID pParameter)
 {
 	(void)pParameter;
-	
+
 	util_assert((hack::clientBase =
 		reinterpret_cast<BYTE *>(util::get_module_base(L"client.dll"))));
 	util_assert((hack::engineBase =
 		reinterpret_cast<BYTE *>(util::get_module_base(L"engine.dll"))));
 
-	util_assert((hack::clientCreateInterface = 
+	util_assert((hack::clientCreateInterface =
 		reinterpret_cast<CreateInterfaceFn>(GetProcAddress(
 		reinterpret_cast<HMODULE>(hack::clientBase), "CreateInterface"))));
 	util_assert((hack::engineCreateInterface =
