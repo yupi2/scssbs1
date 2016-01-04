@@ -51,6 +51,9 @@ BOOL WINAPI DllMain(
 	DWORD     nReason,
 	LPVOID    pReserved)
 {
+	(void)hDLL;
+	(void)pReserved;
+
 	switch (nReason)
 	{
 		case DLL_PROCESS_DETACH:
