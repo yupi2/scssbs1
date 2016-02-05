@@ -3,7 +3,7 @@
 
 #define util_assert(x) if (!(x)) ExitProcess(1);
 
-typedef void* (*CreateInterfaceFn)(const char *pName, int *pReturnCode);
+typedef void * (*CreateInterfaceFn)(const char *pName, int *pReturnCode);
 
 DWORD WINAPI BHOPThreadProc(
 	LPVOID pParameter)
