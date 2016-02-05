@@ -1,5 +1,6 @@
 #include <Windows.h>
 //#include <iostream>
+#include "tier1/interface.h"
 
 #define util_assert(x) if (!(x)) ExitProcess(1);
 

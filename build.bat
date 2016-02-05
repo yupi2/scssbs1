@@ -2,9 +2,9 @@
 
 set "BUILDFILES=dllmain.cpp"
 
-set "INCLUDES=-I."
+set "INCLUDES=-Isource-sdk-2013/mp/src/public/"
 
-set "WARNINGS=-Wall -Wextra -pedantic"
+set "WARNINGS=-Wall -Wextra -pedantic -Wno-unknown-pragmas"
 
 set "stuff=C:\msys64\mingw32\bin"
 set "PATH=%PATH%;%stuff%"
