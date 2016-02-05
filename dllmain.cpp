@@ -3,7 +3,7 @@
 
 #define util_assert(x) if (!(x)) ExitProcess(1);
 
-typedef void * (*CreateInterfaceFn)(const char *pName, int *pReturnCode);
+typedef void * (* CreateInterfaceFn)(const char * pName, int * pReturnCode);
 
 DWORD WINAPI BHOPThreadProc(
 	LPVOID pParameter)
@@ -24,6 +24,8 @@ DWORD WINAPI BHOPThreadProc(
 		GetProcAddress(engineModule, "CreateInterface"))));
 
 	//"VClient017"
+
+	//FrameStageNotify
 
 	// TODO: grab the LocalPlayer class.
 
