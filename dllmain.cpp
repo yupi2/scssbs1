@@ -1,6 +1,7 @@
 #include <Windows.h>
 //#include <iostream>
 #include "tier1/interface.h"
+#include "cdll_int.h"
 
 #define util_assert(x) if (!(x)) ExitProcess(1);
 
@@ -23,6 +24,8 @@ DWORD WINAPI BHOPThreadProc(
 		GetProcAddress(clientModule, "CreateInterface"))));
 	util_assert((engineCreateInterface = reinterpret_cast<CreateInterfaceFn>(
 		GetProcAddress(engineModule, "CreateInterface"))));
+
+	auto test = clientCreateInterface("VClient017", NULL);
 
 	//"VClient017"
 
